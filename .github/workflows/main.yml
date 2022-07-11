@@ -38,8 +38,7 @@ jobs:
       - name: checkout actions
         uses: actions/checkout@v2
         with:
-          repository: maximiliarthur/actions
-          token: ${{ secrets.BOTFAZZ_READ_TOKEN }}
+          repository: maximiliarthur/devsec
           path: actions
 
 #       - name: Gitleaks
