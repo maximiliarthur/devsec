@@ -40,7 +40,7 @@ jobs:
         with:
           repository: maximiliarthur/devsecops-actions
           token: ${{ secrets.GITHUB_TOKEN }}
-          path: ./github/actions
+          path: actions
 
 
 #       - name: Gitleaks
@@ -50,7 +50,7 @@ jobs:
 #           GITLEAKS_ENABLE_UPLOAD_ARTIFACT: false
 
       - name: run scan-secret
-        uses: ./github/actions/scan-secret
+        uses: ./actions/scan-secret
 
       - name: Try 
         run: |
