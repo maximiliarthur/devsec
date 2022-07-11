@@ -49,7 +49,7 @@ jobs:
 #           GITLEAKS_ENABLE_UPLOAD_ARTIFACT: false
 
       - name: run scan-secret
-        uses: ./.github/actions/scan-secret
+        uses: .github/actions/scan-secret
 
       - name: Try 
         run: |
