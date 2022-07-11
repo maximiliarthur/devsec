@@ -42,7 +42,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           path: ./.github/actions
 
-      - run: ls -la actions/
 #       - name: Gitleaks
 #         uses: gitleaks/gitleaks-action@v2
 #         env:
