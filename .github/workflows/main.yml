@@ -36,7 +36,7 @@ jobs:
           path: code
 
       - name: check actions
-        run: ls -la actions/secret-scan/
+        run: ls -la 
 
       - name: check pwd 
         run: pwd
