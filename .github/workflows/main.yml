@@ -27,7 +27,7 @@ jobs:
         run: python -m unittest test.py
  
   security:
-    needs: build
+    # needs: build
     runs-on: ubuntu-latest
     steps:
       - name: checkout code
@@ -35,12 +35,11 @@ jobs:
         with:
           path: code
 
-      - name: checkout actions
-        uses: actions/checkout@v2
-        with:
-          repository: maximiliarthur/devsec/actions
-          token: ${{ secrets.GITHUB_TOKEN }}
-          path: actions
+      - name: check actions
+        run: ls -la actions/secret-scan/
+
+      - name: check pwd 
+        run: pwd
 
 #       - name: Gitleaks
 #         uses: gitleaks/gitleaks-action@v2
