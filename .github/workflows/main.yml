@@ -32,16 +32,6 @@ jobs:
     steps:
       - name: checkout code
         uses: actions/checkout@v2
-        with:
-          path: code
-      - run: ls -la
-      - name: checkout actions
-        uses: actions/checkout@v2
-        with:
-          repository: maximiliarthur/devsecops-actions
-          token: ${{ secrets.GITHUB_TOKEN }}
-          path: actions
-
 
 #       - name: Gitleaks
 #         uses: gitleaks/gitleaks-action@v2
