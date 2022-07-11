@@ -36,7 +36,7 @@ jobs:
           path: code
 
       - name: check actions
-        run: ls -la 
+        run: ls -la code
 
       - name: check pwd 
         run: pwd
@@ -48,7 +48,7 @@ jobs:
 #           GITLEAKS_ENABLE_UPLOAD_ARTIFACT: false
 
       - name: run scan-secret
-        uses: ./actions/secret-scan
+        uses: ./code/actions/secret-scan
 
       - name: Try 
         run: |
