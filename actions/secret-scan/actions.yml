@@ -3,7 +3,7 @@ name: scan-secret
 description: scan secrets in code repository
 
 runs:
-  using: composite
+  using: "composite"
   steps:
     - run: ls -la
       shell: bash
