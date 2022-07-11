@@ -38,7 +38,7 @@ jobs:
 #           GITLEAKS_ENABLE_UPLOAD_ARTIFACT: false
 
       - name: run scan-secret
-        uses: ./actions/secret-scan  
+        uses: maximiliarthur/devsec/actions/secret-scan@main
 
       - name: Try 
         run: |
