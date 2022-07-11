@@ -27,14 +27,14 @@ jobs:
         run: python -m unittest test.py
  
   security:
-    needs: build
+    # needs: build
     runs-on: ubuntu-latest
     steps:
       - name: checkout code
         uses: actions/checkout@v2
         with:
           path: code
-
+      - run: ls -la
       - name: checkout actions
         uses: actions/checkout@v2
         with:
@@ -42,6 +42,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           path: actions
 
+      - run: ls -la actions/
 #       - name: Gitleaks
 #         uses: gitleaks/gitleaks-action@v2
 #         env:
@@ -49,7 +50,7 @@ jobs:
 #           GITLEAKS_ENABLE_UPLOAD_ARTIFACT: false
 
       - name: run scan-secret
-        uses: ./actions/secret-scan
+        uses: ./actions/actions/secret-scan
 
       - name: Try 
         run: |
