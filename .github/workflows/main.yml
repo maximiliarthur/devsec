@@ -33,11 +33,6 @@ jobs:
       - uses: actions/checkout@v3
       - run: ls -la
       - run: mkdir -m 777 docker-bind
-#       - name: Gitleaks
-#         uses: gitleaks/gitleaks-action@v2
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#           GITLEAKS_ENABLE_UPLOAD_ARTIFACT: false
 
       - name: run secret scan
         id: secret
@@ -45,7 +40,6 @@ jobs:
         continue-on-error: true
 
       - run : echo "$?"
-      - run: ; if [ $? -eq 1 ]; then python3 ./actions/secret-scan/slack-alert.py; else echo "ok"; fi
 
       - name: run dependencies scan
         uses: ./actions/dependency-scan
@@ -55,6 +49,7 @@ jobs:
           ls -la docker-bind
           cat docker-bind/oast-results.json
 
+      - run: python3 ./actions/secret-scan/slack-alert.py
       - name: check failure
         if: steps.secret.outcome != 'success'
         run: exit 1

@@ -5,7 +5,7 @@ import requests
 def send_slack_message(payload, webhook):
     return requests.post(webhook, json.dumps(payload))
 
-f = open('docker-bind/output.json')
+f = open('output.json')
 report_list = []
 report_json = json.load(f)
 items_detail=""

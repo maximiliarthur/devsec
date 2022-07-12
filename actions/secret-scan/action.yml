@@ -7,4 +7,6 @@ runs:
   steps:
     - run: docker run -v "$(pwd)":"/path" zricethezav/gitleaks:latest detect -c "/path/actions/secret-scan/gitleaks.toml" -s "/path" --no-git -r "/path/docker-bind/output.json"
       shell: bash
+    - run: mv docker-bind/output.json .
+      shell: bash
       
