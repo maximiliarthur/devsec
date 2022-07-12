@@ -38,8 +38,7 @@ jobs:
         id: secret
         uses: ./actions/secret-scan
         continue-on-error: true
-
-      - run : echo "$?"
+      - run: mv docker-bind/output.json .
 
       - name: run dependencies scan
         uses: ./actions/dependency-scan
