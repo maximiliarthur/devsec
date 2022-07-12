@@ -5,8 +5,6 @@ description: scan secrets in code repository
 runs:
   using: "composite"
   steps:
-    - run: mkdir -m 777 docker-bind
-      shell: bash
     - run: docker run -v "$(pwd)":"/path" zricethezav/gitleaks:latest detect -c "/path/actions/secret-scan/gitleaks.toml" -s "/path" --no-git -r "/path/docker-bind/output.json" --exit-code 0
       shell: bash
     - run: ls -la docker-bind

@@ -1,0 +1,12 @@
+---
+name: dependencies scan
+description: scan dependencies in code repository
+
+runs:
+  using: "composite"
+  steps:
+    - run: docker run --rm -v $(pwd):/src hysnsec/safety check -r requirements.txt --json > oast-results.json
+      shell: bash
+    - run: ls -la docker-bind
+      shell: bash
+      
