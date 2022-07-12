@@ -41,6 +41,8 @@ jobs:
 
       - name: run secret scan
         uses: ./actions/secret-scan
+      - run : echo "$?"
+      - run: ; if [ $? -eq 1 ]; then python3 ./actions/secret-scan/slack-alert.py; else echo "ok"; fi
 
       - name: run dependencies scan
         uses: ./actions/dependency-scan

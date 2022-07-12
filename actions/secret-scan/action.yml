@@ -5,8 +5,6 @@ description: scan secrets in code repository
 runs:
   using: "composite"
   steps:
-    - run: docker run -v "$(pwd)":"/path" zricethezav/gitleaks:latest detect -c "/path/actions/secret-scan/gitleaks.toml" -s "/path" --no-git -r "/path/docker-bind/output.json"; if [ $? -eq 1 ]; then python3 ./actions/secret-scan/slack-alert.py; else echo "ok"; fi
-      shell: bash
-    - run: ls -la docker-bind
+    - run: docker run -v "$(pwd)":"/path" zricethezav/gitleaks:latest detect -c "/path/actions/secret-scan/gitleaks.toml" -s "/path" --no-git -r "/path/docker-bind/output.json"
       shell: bash
       
