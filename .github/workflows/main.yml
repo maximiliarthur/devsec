@@ -44,10 +44,6 @@ jobs:
         uses: ./actions/secret-scan
         continue-on-error: true
 
-      - name: check failure
-        if: steps.secret.outcome != 'success'
-        run: exit 1
-
       - run : echo "$?"
       - run: ; if [ $? -eq 1 ]; then python3 ./actions/secret-scan/slack-alert.py; else echo "ok"; fi
 
@@ -58,6 +54,11 @@ jobs:
         run: |
           ls -la docker-bind
           cat docker-bind/oast-results.json
+
+      - name: check failure
+        if: steps.secret.outcome != 'success'
+        run: exit 1
+
 
   deploy:
     needs: security
