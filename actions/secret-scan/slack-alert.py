@@ -8,7 +8,7 @@ def send_slack_message(payload, webhook):
 f = open('output.json')
 report_list = []
 report_json = json.load(f)
-items_detail=""
+items_detail="=== SECRET SCAN ===\n"
 
 for item in report_json:
     report_dict = {"name": item['Description'], "file": item['File'], "lineNumber": item['StartLine']}
@@ -20,6 +20,6 @@ for item in sorted_report_list:
                     f"Line Number: `{item['lineNumber']}`\n"
 print(items_detail)
 
-webhook = "https://hooks.slack.com/services/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"
-payload = {"text": items_detail, "username" : "secret-scanner"}
+webhook = "https://hooks.slack.com/services/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"
+payload = {"text": items_detail}
 send_slack_message(payload, webhook)
