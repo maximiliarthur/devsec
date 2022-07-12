@@ -1,0 +1,39 @@
+---
+name: deploy-ansible
+description: deploy the code to the server
+
+inputs:
+
+  ssh-key:
+    description: private ssh key 
+    required: true
+
+  known-host:
+    description: known host
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - run: python3 -m pip install --user ansible
+      shell: bash
+    - run: ansible --version
+      shell: bash
+    - run: |
+        mkdir -p ~/.ssh
+        echo "${{ inputs.ssh-key }}" | tr -d '\r' > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        eval "$(ssh-agent -s)"
+        ssh-add ~/.ssh/id_rsa
+        echo "${{ inputs.known-host }}" >> ~/.ssh/known_hosts
+      shell: bash
+    - run: cat ~/.ssh/id_rsa
+      shell: bash
+    - run: cat ~/.ssh/known_hosts
+      shell: bash
+    - run: ls -la
+      shell: bash
+    - run: alias ansible_ssh_transfer_method=scp
+      shell: bash
+    - run: ansible-playbook -i inventory.ini revoke.yml
+      shell: bash
