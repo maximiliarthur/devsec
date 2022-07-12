@@ -51,12 +51,10 @@ jobs:
           cat docker-bind/oast-results.json
 
   deploy:
-    # needs: build
+    needs: security
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: ls -la
-      - run: mkdir -m 777 docker-bind
 
       - name: run deploy
         uses: ./actions/deploy-ansible
