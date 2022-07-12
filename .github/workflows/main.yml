@@ -56,17 +56,16 @@ jobs:
       - name: run alert dependencies
         run: python3 ./actions/dependency-scan/slack-alert.py ${{ secrets.SLACK_WEBHOOK}}
 
-      - name: check failure
-        if: steps.secret.outcome != 'success' || steps.dependencies.outcome != 'success'
-        run: exit 1
+      # - name: check failure
+      #   if: steps.secret.outcome != 'success' || steps.dependencies.outcome != 'success'
+      #   run: exit 1
       # - name: check failure
       #   if: steps.dependencies.outcome != 'success'
-      #   run: exit 1
+      #   run: exit 1 # test
 
 
   deploy:
     needs: security
-    if: github.event.review.state == 'approved'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
