@@ -1,0 +1,11 @@
+---
+name: deploy-ansible
+description: deploy the code to the server
+
+runs:
+  using: "composite"
+  steps:
+    - run: python3 -m pip install --user ansible
+      shell: bash
+    - run: ansible --version
+      shell: bash

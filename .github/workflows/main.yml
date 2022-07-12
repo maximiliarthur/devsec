@@ -50,3 +50,19 @@ jobs:
           ls -la docker-bind
           cat docker-bind/oast-results.json
 
+  deploy:
+    # needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: ls -la
+      - run: mkdir -m 777 docker-bind
+
+      - name: run deploy
+        uses: ./actions/deploy-ansible
+
+      - name: Try 
+        run: |
+          ls -la docker-bind
+          cat docker-bind/oast-results.json
+
