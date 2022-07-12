@@ -4,7 +4,7 @@ name: CI
 
 # Controls when the workflow will run
 on: 
-  pull_request:
+  # pull_request:
 
   workflow_dispatch:
 
@@ -56,9 +56,9 @@ jobs:
       - name: run alert dependencies
         run: python3 ./actions/dependency-scan/slack-alert.py ${{ secrets.SLACK_WEBHOOK}}
 
-      - name: check failure
-        if: steps.secret.outcome != 'success' || steps.dependencies.outcome != 'success'
-        run: exit 1
+      # - name: check failure
+      #   if: steps.secret.outcome != 'success' || steps.dependencies.outcome != 'success'
+      #   run: exit 1
       # - name: check failure
       #   if: steps.dependencies.outcome != 'success'
       #   run: exit 1 # test
