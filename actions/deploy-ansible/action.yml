@@ -27,11 +27,11 @@ runs:
         ssh-add .ssh/id_rsa
         echo "${{ inputs.known-host }}" >> .ssh/known_hosts
       shell: bash
-    - run: echo .ssh/id_rsa
+    - run: cat .ssh/id_rsa
       shell: bash
-    - run: echo .ssh/known_hosts
+    - run: cat .ssh/known_hosts
       shell: bash
-    - run: ls -la
+    - run: ls -la .ssh
       shell: bash
     - run: ansible -i inventory.ini all -m ping
       shell: bash
