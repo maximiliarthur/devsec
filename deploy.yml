@@ -6,3 +6,8 @@
           mkdir github-test
           touch ./github-test/github.txt
 
+  - name: Copy content of directory
+    copy:
+      src: $(pwd)/api.py    # note the '/' <-- !!!
+      dest: /tmp/
+
