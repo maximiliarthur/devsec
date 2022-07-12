@@ -9,8 +9,8 @@ runs:
       shell: bash
     - run: docker run --rm -v $(pwd):/src hysnsec/safety check -r requirements.txt --json > oast-results.json
       shell: bash
-    - run: mv oast-results.json docker-bind/
+    - run: if [ $? -eq 1 ]; then python3 ./actions/dependency-scan/slack-alert.py; else echo "ok"; fi
       shell: bash
-    - run: ls -la docker-bind
+    - run: ls -la
       shell: bash
       
