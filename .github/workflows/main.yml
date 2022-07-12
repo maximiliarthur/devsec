@@ -44,10 +44,7 @@ jobs:
       - name: run dependencies scan
         uses: ./actions/dependency-scan
 
-      - name: Try 
-        run: |
-          ls -la docker-bind
-          cat docker-bind/oast-results.json
+      - run: ls -la
 
       - run: python3 ./actions/secret-scan/slack-alert.py
       - name: check failure
