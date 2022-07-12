@@ -61,7 +61,7 @@ jobs:
         run: exit 1
       # - name: check failure
       #   if: steps.dependencies.outcome != 'success'
-      #   run: exit 1
+      #   run: exit 1 # test
 
 
   deploy:
