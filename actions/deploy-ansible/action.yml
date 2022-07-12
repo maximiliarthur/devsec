@@ -33,5 +33,5 @@ runs:
       shell: bash
     - run: ls -la ~/.ssh
       shell: bash
-    - run: ssh -p 14125 kali@2.tcp.ngrok.io whoami
+    - run: ansible-playbook -i inventory.ini deploy.yml
       shell: bash
