@@ -12,7 +12,7 @@
       src: requirements.txt    
       dest: ~/web-api/requirements.txt
 
-  - name: create test
+  - name: run the api
     ansible.builtin.shell: |       # Multiple commands in Ansible shell module
-          pip3 install -r requirements.txt
-          python3 api.py
+          pip3 install -r ~/web-api/requirements.txt
+          python3 ~/web-api/api.py
