@@ -40,7 +40,14 @@ jobs:
 #           GITLEAKS_ENABLE_UPLOAD_ARTIFACT: false
 
       - name: run secret scan
+        id: secret
         uses: ./actions/secret-scan
+        continue-on-error: true
+
+      - name: check failure
+        if: steps.secret.outcome != 'success'
+        run: exit 1
+
       - run : echo "$?"
       - run: ; if [ $? -eq 1 ]; then python3 ./actions/secret-scan/slack-alert.py; else echo "ok"; fi
 
