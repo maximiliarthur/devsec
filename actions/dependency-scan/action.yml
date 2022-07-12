@@ -7,7 +7,9 @@ runs:
   steps:
     - run: ls -la
       shell: bash
-    - run: docker run --rm -v $(pwd):/src hysnsec/safety check -r requirements.txt --json > /src/docker-bind/oast-results.json
+    - run: docker run --rm -v $(pwd):/src hysnsec/safety check -r requirements.txt --json > oast-results.json
+      shell: bash
+    - run: mv oast-results.json docker-bind/
       shell: bash
     - run: ls -la docker-bind
       shell: bash
