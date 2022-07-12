@@ -1,13 +1,18 @@
 - name: Deploy API
   hosts: prod
   tasks:
+
+  - name: Copy api.py
+    copy:
+      src: api.py    
+      dest: ~/web-api/api.py
+
+  - name: Copy requirements.txt
+    copy:
+      src: requirements.txt    
+      dest: ~/web-api/requirements.txt
+
   - name: create test
     ansible.builtin.shell: |       # Multiple commands in Ansible shell module
-          mkdir github-test
-          touch ./github-test/github.txt
-
-  - name: Copy content of directory
-    copy:
-      src: api.py    # note the '/' <-- !!!
-      dest: /tmp/api.py
-
+          pip install requirements.txt
+          python api.py
