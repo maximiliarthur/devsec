@@ -10,12 +10,14 @@ runs:
     - run: ansible --version
       shell: bash
     - run: |
-        mkdir -p ~/.ssh
-        echo "${{ secrets.DEPLOYMENT_SERVER_SSH_PRIVKEY }}" | tr -d '\r' > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
+        mkdir -p .ssh
+        echo "${{ secrets.DEPLOYMENT_SERVER_SSH_PRIVKEY }}" | tr -d '\r' > .ssh/id_rsa
+        chmod 600 .ssh/id_rsa
         eval "$(ssh-agent -s)"
-        ssh-add ~/.ssh/id_rsa
-        ssh-keyscan -t rsa ${{ secrets.DEPLOYMENT_SERVER }} >> ~/.ssh/known_hosts
+        ssh-add .ssh/id_rsa
+        ssh-keyscan -t rsa ${{ secrets.DEPLOYMENT_SERVER }} >> .ssh/known_hosts
       shell: bash
     - run: echo .ssh/id_rsa
+      shell: bash
+    - run: echo .ssh/known_hosts
       shell: bash
