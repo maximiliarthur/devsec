@@ -14,5 +14,5 @@
 
   - name: create test
     ansible.builtin.shell: |       # Multiple commands in Ansible shell module
-          pip install requirements.txt
-          python api.py
+          pip3 install -r requirements.txt
+          python3 api.py

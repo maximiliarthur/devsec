@@ -8,7 +8,7 @@ aws_key = "AKIAIOSFODNN7EXAMPLE"
 
 @app.route("/", methods=["GET"])
 def first():
-    result = "Hello World"
+    result = "Hello World1"
     return (result)
 
 @app.route("/version", methods=["GET"])
