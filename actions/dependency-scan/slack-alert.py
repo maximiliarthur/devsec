@@ -1,6 +1,7 @@
 import json
 from operator import itemgetter
 import requests
+import sys
 
 def send_slack_message(payload, webhook):
     return requests.post(webhook, json.dumps(payload))
@@ -23,6 +24,6 @@ for item in sorted_report_list:
                     f"Version: `{item['version']}`\n"
 print(items_detail)
 
-webhook = "https://hooks.slack.com/services/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"
+webhook = sys.argv[1]
 payload = {"text": items_detail}
 send_slack_message(payload, webhook)

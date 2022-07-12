@@ -45,7 +45,7 @@ jobs:
 
       - run: ls -la
 
-      - run: python3 ./actions/secret-scan/slack-alert.py
+      - run: python3 ./actions/secret-scan/slack-alert.py ${{ secrets.SLACK_WEBHOOK}}
       - name: check failure
         if: steps.secret.outcome != 'success'
         run: exit 1
