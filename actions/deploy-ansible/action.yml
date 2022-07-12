@@ -31,7 +31,9 @@ runs:
       shell: bash
     - run: cat ~/.ssh/known_hosts
       shell: bash
-    - run: ls -la ~/.ssh
+    - run: ls -la
+      shell: bash
+    - run: alias ansible_ssh_transfer_method=scp
       shell: bash
     - run: ansible-playbook -i inventory.ini deploy.yml
       shell: bash
