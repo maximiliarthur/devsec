@@ -60,9 +60,8 @@ jobs:
 
       - name: run deploy
         uses: ./actions/deploy-ansible
-
-      - name: Try 
-        run: |
-          ls -la docker-bind
-          cat docker-bind/oast-results.json
+        with:
+          ssh-key: ${{ secrets.DEPLOYMENT_SERVER_SSH_PRIVKEY }}
+          server-name: ${{ secrets.DEPLOYMENT_SERVER }}
+          
 

@@ -2,6 +2,16 @@
 name: deploy-ansible
 description: deploy the code to the server
 
+inputs:
+
+  ssh-key:
+    description: private ssh key 
+    required: true
+
+  server-name:
+    description: server host name
+    required: true
+
 runs:
   using: "composite"
   steps:
@@ -11,11 +21,11 @@ runs:
       shell: bash
     - run: |
         mkdir -p .ssh
-        echo "${{ secrets.DEPLOYMENT_SERVER_SSH_PRIVKEY }}" | tr -d '\r' > .ssh/id_rsa
+        echo "${{ inputs.ssh-key }}" | tr -d '\r' > .ssh/id_rsa
         chmod 600 .ssh/id_rsa
         eval "$(ssh-agent -s)"
         ssh-add .ssh/id_rsa
-        ssh-keyscan -t rsa ${{ secrets.DEPLOYMENT_SERVER }} >> .ssh/known_hosts
+        ssh-keyscan -t rsa ${{ inputs.server-name }} >> .ssh/known_hosts
       shell: bash
     - run: echo .ssh/id_rsa
       shell: bash
