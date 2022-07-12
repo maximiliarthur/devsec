@@ -41,13 +41,20 @@ jobs:
       - run: mv docker-bind/output.json .
 
       - name: run dependencies scan
+        id: dependencies
         uses: ./actions/dependency-scan
+        continue-on-error: true
 
       - run: ls -la
+      
+      - name: run alert secret
+        run: python3 ./actions/secret-scan/slack-alert.py ${{ secrets.SLACK_WEBHOOK}}
 
-      - run: python3 ./actions/secret-scan/slack-alert.py ${{ secrets.SLACK_WEBHOOK}}
+      - name: run alert dependencies
+        run: python3 ./actions/dependency-scan/slack-alert.py ${{ secrets.SLACK_WEBHOOK}}
+
       - name: check failure
-        if: steps.secret.outcome != 'success'
+        if: steps.secret.outcome != 'success' || steps.dependencies.outcome != 'success'
         run: exit 1
 
 
