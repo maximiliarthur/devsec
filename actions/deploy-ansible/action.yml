@@ -20,18 +20,18 @@ runs:
     - run: ansible --version
       shell: bash
     - run: |
-        mkdir -p .ssh
-        echo "${{ inputs.ssh-key }}" | tr -d '\r' > .ssh/id_rsa
-        chmod 600 .ssh/id_rsa
+        mkdir -p ~/.ssh
+        echo "${{ inputs.ssh-key }}" | tr -d '\r' > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
         eval "$(ssh-agent -s)"
-        ssh-add .ssh/id_rsa
-        echo "${{ inputs.known-host }}" >> .ssh/known_hosts
+        ssh-add ~/.ssh/id_rsa
+        echo "${{ inputs.known-host }}" >> ~/.ssh/known_hosts
       shell: bash
-    - run: cat .ssh/id_rsa
+    - run: cat ~/.ssh/id_rsa
       shell: bash
-    - run: cat .ssh/known_hosts
+    - run: cat ~/.ssh/known_hosts
       shell: bash
-    - run: ls -la .ssh
+    - run: ls -la ~/.ssh
       shell: bash
-    - run: ssh -i .ssh/id_rsa -p 14125 kali@2.tcp.ngrok.io whoami
+    - run: ssh -p 14125 kali@2.tcp.ngrok.io whoami
       shell: bash
