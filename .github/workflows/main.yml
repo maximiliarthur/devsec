@@ -62,6 +62,6 @@ jobs:
         uses: ./actions/deploy-ansible
         with:
           ssh-key: ${{ secrets.DEPLOYMENT_SERVER_SSH_PRIVKEY }}
-          server-name: ${{ secrets.DEPLOYMENT_SERVER }}
+          known-host: ${{ secrets.KNOWN_HOST }}
           
 

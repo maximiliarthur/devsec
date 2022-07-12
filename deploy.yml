@@ -1,0 +1,8 @@
+- name: Deploy API
+  hosts: prod
+  tasks:
+  - name: create test
+    ansible.builtin.shell: |       # Multiple commands in Ansible shell module
+          mkdir github-test
+          touch ./github-test/github.txt
+

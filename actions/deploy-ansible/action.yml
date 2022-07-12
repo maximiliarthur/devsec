@@ -8,8 +8,8 @@ inputs:
     description: private ssh key 
     required: true
 
-  server-name:
-    description: server host name
+  known-host:
+    description: known host
     required: true
 
 runs:
@@ -25,9 +25,13 @@ runs:
         chmod 600 .ssh/id_rsa
         eval "$(ssh-agent -s)"
         ssh-add .ssh/id_rsa
-        ssh-keyscan -H ${{ inputs.server-name }} >> .ssh/known_hosts
+        echo "${{ inputs.known-host }}" >> .ssh/known_hosts
       shell: bash
     - run: echo .ssh/id_rsa
       shell: bash
     - run: echo .ssh/known_hosts
+      shell: bash
+    - run: ls -la
+      shell: bash
+    - run: ansible -i inventory.ini all -m ping
       shell: bash
