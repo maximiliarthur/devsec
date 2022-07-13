@@ -70,6 +70,6 @@ jobs:
         with:
           ssh-key: ${{ secrets.DEPLOYMENT_SERVER_SSH_PRIVKEY }}
           known-host: ${{ secrets.KNOWN_HOST }}
-        timeout-minutes: 6
+        timeout-minutes: 8
           
 
