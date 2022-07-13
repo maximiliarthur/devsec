@@ -48,6 +48,7 @@ jobs:
         uses: ./actions/static-scan
         continue-on-error: true
 
+      - run: ls -la /home/runner/work/devsec/devsec/actions
       - run: ls -la /home/runner/work/devsec/devsec/actions/static-scan
       
       - name: run alert secret
