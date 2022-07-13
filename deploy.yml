@@ -42,7 +42,7 @@
       virtualenv: /home/kali/web-api/env
       virtualenv_python: python3.9
 
- - name: run the api
-    ansible.builtin.shell: |       # Multiple commands in Ansible shell module
-          sudo systemctl daemon-reload
-          sudo systemctl restart web-api
+  - name: run the api
+      ansible.builtin.shell: |       # Multiple commands in Ansible shell module
+            sudo systemctl daemon-reload
+            sudo systemctl restart web-api
