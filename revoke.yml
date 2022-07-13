@@ -6,3 +6,4 @@
     ansible.builtin.shell: |       # Multiple commands in Ansible shell module
         pkill -f "python3 /home/kali/web-api/api.py"
         rm -f ~/web-api/requirements.txt /home/kali/web-api/api.py
+    ignore_errors: true
