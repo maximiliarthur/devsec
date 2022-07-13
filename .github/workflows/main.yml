@@ -48,7 +48,7 @@ jobs:
         uses: ./actions/static-scan
         continue-on-error: true
 
-      - run: ls -la
+      - run: ls -la /home/runner/work/devsec/devsec/actions/static-scan
       
       - name: run alert secret
         run: python3 ./actions/secret-scan/slack-alert.py ${{ secrets.SLACK_WEBHOOK}}
