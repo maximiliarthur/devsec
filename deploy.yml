@@ -38,37 +38,7 @@
 
   - name: install modules in a virtualenv
     pip:
+      name: gunicorn
       requirements: /home/kali/web-api/requirements.txt
       virtualenv: /home/kali/web-api/env
       virtualenv_python: python3.9
-
-# Configure app systemd service and nginx
-- hosts: prod
-  become: yes
-  become_method: sudo
-  tasks:
-  - name: template systemd service config
-    copy:
-      src: .service
-      dest: /etc/systemd/system/web-api.service
-  - name: start systemd app service
-    systemd: name=web-api.service state=restarted enabled=yes
-  - name: template nginx site config
-    template:
-      src: .nginx
-      dest: /etc/nginx/sites-available/web-api
-  - name: remove default nginx site config
-    file: path=/etc/nginx/sites-enabled/default state=absent
-  # - command: mv /etc/nginx/sites-enabled/default /tmp/nginx.sites-enabled.default
-  - name: enable nginx site
-    file:
-      src: /etc/nginx/sites-available/web-api
-      dest: /etc/nginx/sites-enabled/default
-      state: link
-      force: yes
-  - name: restart nginx
-    systemd: name=nginx state=restarted enabled=yes
-  - name: open firewall for nginx
-    ufw:
-      rule: allow
-      name: Nginx Full
