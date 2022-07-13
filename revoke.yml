@@ -2,8 +2,12 @@
   hosts: prod
   tasks:
 
-  - name: run the api
+  - name: stop the api
     ansible.builtin.shell: |       # Multiple commands in Ansible shell module
         pkill -f "python3 /home/kali/web-api/api.py"
+    ignore_errors: true
+
+  - name: delete the files
+    ansible.builtin.shell: |       # Multiple commands in Ansible shell module
         rm -f ~/web-api/requirements.txt /home/kali/web-api/api.py
     ignore_errors: true
