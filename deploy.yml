@@ -2,21 +2,22 @@
   hosts: prod
   tasks:
 
-  # - name: Copy api.py
-  #   copy:
-  #     src: api.py    
-  #     dest: ~/web-api/api.py
+  - name: Copy api.py
+    copy:
+      src: api.py    
+      dest: ~/web-api/api.py
 
   - name: Copy requirements.txt
     copy:
       src: requirements.txt    
       dest: ~/web-api/requirements.txt
 
-  - name: install modules in a virtualenv
-    pip:
-      requirements: /home/kali/web-api/requirements.txt
-      virtualenv: /home/kali/web-api/env
-      virtualenv_python: python3.9
+  - name: Copy wsgi.py
+    copy:
+      src: wsgi.py    
+      dest: ~/web-api/wsgi.py
+
+
 
   # - name: install dependencies
   #   ansible.builtin.shell: |       # Multiple commands in Ansible shell module
@@ -29,11 +30,17 @@
   # - name: run service
   #   command: bash -lc "cd ~/web-api && python3 api.py"
 
-  - name: clone repo
-    git:
-      repo: 'https://github.com/maximiliarthur/devsec.git'
-      dest: /home/{{ ansible_ssh_user }}/{{ app_name }}
-      update: yes  # Does a git pull if the repo already exists
+  # - name: clone repo
+  #   git:
+  #     repo: 'https://github.com/maximiliarthur/devsec.git'
+  #     dest: /home/kali/web-api
+  #     update: yes  # Does a git pull if the repo already exists
+
+  - name: install modules in a virtualenv
+    pip:
+      requirements: /home/kali/web-api/requirements.txt
+      virtualenv: /home/kali/web-api/env
+      virtualenv_python: python3.9
 
 # Configure app systemd service and nginx
 - hosts: prod
