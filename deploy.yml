@@ -2,23 +2,66 @@
   hosts: prod
   tasks:
 
-  - name: Copy api.py
-    copy:
-      src: api.py    
-      dest: ~/web-api/api.py
+  # - name: Copy api.py
+  #   copy:
+  #     src: api.py    
+  #     dest: ~/web-api/api.py
 
   - name: Copy requirements.txt
     copy:
       src: requirements.txt    
       dest: ~/web-api/requirements.txt
 
-  - name: install dependencies
-    ansible.builtin.shell: |       # Multiple commands in Ansible shell module
-          pip3 install -r ~/web-api/requirements.txt
+  - name: install modules in a virtualenv
+    pip:
+      requirements: /home/kali/web-api/requirements.txt
+      virtualenv: /home/kali/web-api/env
+      virtualenv_python: python3.9
+
+  # - name: install dependencies
+  #   ansible.builtin.shell: |       # Multiple commands in Ansible shell module
+  #         pip3 install -r ~/web-api/requirements.txt
 
   # - name: run the api
   #   ansible.builtin.shell: |       # Multiple commands in Ansible shell module
   #         cd ~/web-api | flask run &
 
-  - name: run service
-    command: bash -lc "cd ~/web-api && python3 api.py"
+  # - name: run service
+  #   command: bash -lc "cd ~/web-api && python3 api.py"
+
+  - name: clone repo
+    git:
+      repo: 'https://github.com/maximiliarthur/devsec.git'
+      dest: /home/{{ ansible_ssh_user }}/{{ app_name }}
+      update: yes  # Does a git pull if the repo already exists
+
+# Configure app systemd service and nginx
+- hosts: prod
+  become: yes
+  become_method: sudo
+  tasks:
+  - name: template systemd service config
+    copy:
+      src: .service
+      dest: /etc/systemd/system/web-api.service
+  - name: start systemd app service
+    systemd: name=web-api.service state=restarted enabled=yes
+  - name: template nginx site config
+    template:
+      src: .nginx
+      dest: /etc/nginx/sites-available/web-api
+  - name: remove default nginx site config
+    file: path=/etc/nginx/sites-enabled/default state=absent
+  # - command: mv /etc/nginx/sites-enabled/default /tmp/nginx.sites-enabled.default
+  - name: enable nginx site
+    file:
+      src: /etc/nginx/sites-available/web-api
+      dest: /etc/nginx/sites-enabled/default
+      state: link
+      force: yes
+  - name: restart nginx
+    systemd: name=nginx state=restarted enabled=yes
+  - name: open firewall for nginx
+    ufw:
+      rule: allow
+      name: Nginx Full
