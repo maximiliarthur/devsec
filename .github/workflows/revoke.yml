@@ -6,7 +6,7 @@ on:
 
 jobs:
 
-  build:
+  revoke:
 
     runs-on: ubuntu-latest
 
@@ -17,4 +17,5 @@ jobs:
         uses: ./actions/revoke-ansible
         with:
           ssh-key: ${{ secrets.DEPLOYMENT_SERVER_SSH_PRIVKEY }}
-          known-host: ${{ secrets.KNOWN_HOST }}
+          known-host: ${{ secrets.KNOWN_HOST }}\
+        continue-on-error: true
