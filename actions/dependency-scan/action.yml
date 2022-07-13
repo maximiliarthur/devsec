@@ -9,4 +9,3 @@ runs:
       shell: bash
     - run: docker run --rm -v $(pwd):/src hysnsec/safety check -r requirements.txt --json > oast-results.json
       shell: bash
-      

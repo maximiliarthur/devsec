@@ -1,0 +1,11 @@
+---
+name: static code scan
+description: scan static code repository
+
+runs:
+  using: "composite"
+  steps:
+    - run: ls -la
+      shell: bash
+    - run: docker run --user $(id -u):$(id -g) -v $(pwd):/src --rm hysnsec/bandit -r /src -f json -o /src/bandit-output.json
+      shell: bash

@@ -43,6 +43,11 @@ jobs:
         uses: ./actions/dependency-scan
         continue-on-error: true
 
+      - name: run static scan
+        id: static
+        uses: ./actions/static-scan
+        continue-on-error: true
+
       - run: ls -la
       
       - name: run alert secret
@@ -59,17 +64,17 @@ jobs:
       #   run: exit 1 # test
 
 
-  deploy:
-    needs: security
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
+  # deploy:
+  #   needs: security
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
 
-      - name: run deploy
-        uses: ./actions/deploy-ansible
-        with:
-          ssh-key: ${{ secrets.DEPLOYMENT_SERVER_SSH_PRIVKEY }}
-          known-host: ${{ secrets.KNOWN_HOST }}
-        timeout-minutes: 8
+  #     - name: run deploy
+  #       uses: ./actions/deploy-ansible
+  #       with:
+  #         ssh-key: ${{ secrets.DEPLOYMENT_SERVER_SSH_PRIVKEY }}
+  #         known-host: ${{ secrets.KNOWN_HOST }}
+  #       timeout-minutes: 8
           
 
