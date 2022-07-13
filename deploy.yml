@@ -38,7 +38,6 @@
 
   - name: install modules in a virtualenv
     pip:
-      name: gunicorn
       requirements: /home/kali/web-api/requirements.txt
       virtualenv: /home/kali/web-api/env
       virtualenv_python: python3.9
