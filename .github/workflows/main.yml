@@ -45,11 +45,12 @@ jobs:
 
       - name: run static scan
         id: static
-        uses: ./actions/static-scan
+        uses: ./actions/static-code-scan
         continue-on-error: true
 
       - run: ls -la /home/runner/work/devsec/devsec/actions
-      - run: ls -la /home/runner/work/devsec/devsec/actions/static-scan
+      - run: ls -la /home/runner/work/devsec/devsec/actions/dependency-scan
+      - run: ls -la /home/runner/work/devsec/devsec/actions/static-code-scan
       
       - name: run alert secret
         run: python3 ./actions/secret-scan/slack-alert.py ${{ secrets.SLACK_WEBHOOK}}
