@@ -21,4 +21,4 @@
   #         cd ~/web-api | flask run &
 
   - name: run service
-    command: bash -lc "export FLASK_APP='api.py' && cd ~/web-api && /usr/bin/flask run &"
+    command: bash -lc "cd ~/web-api && python3 api.py"
