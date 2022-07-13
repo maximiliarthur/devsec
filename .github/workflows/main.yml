@@ -48,13 +48,16 @@ jobs:
         uses: ./actions/static-code-scan
         continue-on-error: true
 
-      - run: ls -la /home/runner/work/devsec/devsec/actions/static-code-scan/
+      - run: ls -la
       
       - name: run alert secret
         run: python3 ./actions/secret-scan/slack-alert.py ${{ secrets.SLACK_WEBHOOK}}
 
       - name: run alert dependencies
         run: python3 ./actions/dependency-scan/slack-alert.py ${{ secrets.SLACK_WEBHOOK}}
+
+      - name: run alert static scan
+        run: python3 ./actions/static-code-scan/slack-alert.py ${{ secrets.SLACK_WEBHOOK}}
 
       # - name: check failure
       #   if: steps.secret.outcome != 'success' || steps.dependencies.outcome != 'success'
