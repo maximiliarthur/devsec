@@ -12,7 +12,10 @@
       src: requirements.txt    
       dest: ~/web-api/requirements.txt
 
-  - name: run the api
+  - name: install dependencies
     ansible.builtin.shell: |       # Multiple commands in Ansible shell module
           pip3 install -r ~/web-api/requirements.txt
-          flask run &
+
+  - name: run the api
+    ansible.builtin.shell: |       # Multiple commands in Ansible shell module
+          cd ~/web-api | flask run &
