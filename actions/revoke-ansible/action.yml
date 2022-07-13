@@ -27,10 +27,6 @@ runs:
         ssh-add ~/.ssh/id_rsa
         echo "${{ inputs.known-host }}" >> ~/.ssh/known_hosts
       shell: bash
-    - run: cat ~/.ssh/id_rsa
-      shell: bash
-    - run: cat ~/.ssh/known_hosts
-      shell: bash
     - run: ls -la
       shell: bash
     - run: alias ansible_ssh_transfer_method=scp
