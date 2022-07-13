@@ -21,6 +21,6 @@
   #         cd ~/web-api | flask run &
 
   - name: run service
-    command: "flask run &"
+    shell: "flask run &"
     args:
       chdir: "~/web-api/"
