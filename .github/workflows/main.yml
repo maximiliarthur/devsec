@@ -47,10 +47,7 @@ jobs:
         id: static
         uses: ./actions/static-code-scan
         continue-on-error: true
-      - uses: actions/checkout@v2
-      - run: ls -la /home/runner/work/devsec/devsec/actions
-      - run: cd /home/runner/work/devsec/devsec/actions/static-code-scan
-      - run: ls -la /home/runner/work/devsec/devsec/actions/dependency-scan
+
       - run: ls -la /home/runner/work/devsec/devsec/actions/static-code-scan/
       
       - name: run alert secret
