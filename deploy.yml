@@ -16,6 +16,11 @@
     ansible.builtin.shell: |       # Multiple commands in Ansible shell module
           pip3 install -r ~/web-api/requirements.txt
 
-  - name: run the api
-    ansible.builtin.shell: |       # Multiple commands in Ansible shell module
-          cd ~/web-api | flask run &
+  # - name: run the api
+  #   ansible.builtin.shell: |       # Multiple commands in Ansible shell module
+  #         cd ~/web-api | flask run &
+
+  - name: run service
+    command: "flask run &"
+    args:
+      chdir: "~/web-api/"
