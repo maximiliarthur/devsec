@@ -44,7 +44,7 @@
   #           sudo systemctl daemon-reload
   #           sudo systemctl restart web-api
 
-  - name: install dependencies
+  - name: reload and run service
     ansible.builtin.shell: |       # Multiple commands in Ansible shell module
           sudo systemctl daemon-reload
           sudo systemctl restart web-api
