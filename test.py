@@ -15,7 +15,7 @@ class FlaskTest(unittest.TestCase):
         tester = app.test_client(self)
         response = tester.get("/")
         text = response.text
-        self.assertEqual(text,"Hello World1")
+        self.assertEqual(text,"Hello World")
 
     def test_version(self):
         tester = app.test_client(self)
