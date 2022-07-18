@@ -59,9 +59,9 @@ jobs:
       - name: run alert static scan
         run: python3 ./actions/static-code-scan/slack-alert.py ${{ secrets.SLACK_WEBHOOK}}
 
-      # - name: check failure
-      #   if: steps.secret.outcome != 'success' || steps.dependencies.outcome != 'success' || steps.static.outcome != 'success'
-      #   run: exit 1
+      - name: check failure
+        if: steps.secret.outcome != 'success' || steps.dependencies.outcome != 'success' || steps.static.outcome != 'success'
+        run: exit 1
       # - name: check failure
       #   if: steps.dependencies.outcome != 'success'
       #   run: exit 1 # test
